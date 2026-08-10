@@ -1,0 +1,7 @@
+{
+  "packageName": "com.eightsleep.eight",
+  "sdkPackage": "@mergd/eight-sleep",
+  "sdkDirectory": "packages/eight-sleep",
+  "apiHosts": ["client-api.8slp.net", "app-api.8slp.net"],
+  "sourceGlobs": ["**/*.dex", "**/*.smali", "**/*.so"]
+}

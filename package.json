@@ -5,11 +5,12 @@
   "type": "module",
   "workspaces": ["packages/*"],
   "scripts": {
-    "build": "bun run --cwd packages/beli build",
+    "build": "bun run --cwd packages/beli build && bun run --cwd packages/eight-sleep build",
     "test": "bun test",
-    "typecheck": "bun run --cwd packages/beli typecheck",
+    "typecheck": "bun run --cwd packages/beli typecheck && bun run --cwd packages/eight-sleep typecheck",
     "check": "bun run typecheck && bun test && bun run build",
-    "pack:beli": "bun run --cwd packages/beli pack"
+    "pack:beli": "bun run --cwd packages/beli pack",
+    "pack:eight-sleep": "bun run --cwd packages/eight-sleep pack"
   },
   "devDependencies": {
     "@types/bun": "^1.3.14",
