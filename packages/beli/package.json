@@ -1,0 +1,42 @@
+{
+  "name": "@mergd/beli",
+  "version": "0.1.0",
+  "description": "Unofficial, typed TypeScript SDK for Beli's mobile API",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "pack": "bun pm pack",
+    "prepublishOnly": "bun run typecheck && bun test && bun run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mergd/apk2sdk.git",
+    "directory": "packages/beli"
+  },
+  "homepage": "https://github.com/mergd/apk2sdk/tree/main/packages/beli#readme",
+  "bugs": {
+    "url": "https://github.com/mergd/apk2sdk/issues"
+  },
+  "keywords": ["beli", "sdk", "api", "typescript", "unofficial"],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

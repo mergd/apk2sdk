@@ -1,0 +1,7 @@
+{
+  "packageName": "com.beliapp.myapp",
+  "sdkPackage": "@mergd/beli",
+  "framework": "capacitor-angular",
+  "bundleGlobs": ["assets/public/*.js", "assets/public/**/*.js"],
+  "sdkDirectory": "packages/beli"
+}

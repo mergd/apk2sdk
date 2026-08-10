@@ -1,0 +1,23 @@
+{
+  "name": "apk2sdk",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "bun run --cwd packages/beli build",
+    "test": "bun test",
+    "typecheck": "bun run --cwd packages/beli typecheck",
+    "check": "bun run typecheck && bun test && bun run build",
+    "pack:beli": "bun run --cwd packages/beli pack"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.14",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "bun@1.3.11"
+}
