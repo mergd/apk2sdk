@@ -1,0 +1,61 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Workspace package directory to publish
+        required: true
+        type: choice
+        options:
+          - beli
+          - eight-sleep
+          - segway
+          - butterflymx
+  push:
+    tags:
+      - "beli@*"
+      - "eight-sleep@*"
+      - "segway@*"
+      - "butterflymx@*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Ensure npm CLI supports OIDC
+        run: npm install -g npm@latest
+
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+
+      - name: Resolve package
+        id: pkg
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            name="${{ inputs.package }}"
+          else
+            name="${GITHUB_REF_NAME%@*}"
+          fi
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          test -d "packages/$name"
+
+      - name: Publish
+        working-directory: packages/${{ steps.pkg.outputs.name }}
+        run: npm publish --access public

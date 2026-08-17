@@ -5,14 +5,15 @@ Beli Android APK.
 
 ## Inputs
 
-- The new APK or unpacked APK directory supplied by the operator.
+- The new APK from **APKPure** (see root `AGENTS.md`) or an unpacked APK
+  directory supplied by the operator.
 - The current SDK in `packages/beli/`.
 - The existing Beli target configuration in `targets/beli/`.
 
 ## Work
 
-1. Confirm the Android package is `com.beliapp.myapp` and record the app version
-   in the resulting changelog.
+1. Confirm the Android package is `com.beliapp.myapp` and record `appVersion` /
+   `versionCode` from APKPure in `target.json`, `SOURCE_APP`, and the README.
 2. Locate the Capacitor web assets and compiled Angular JavaScript bundles.
 3. Search API wrapper code and call sites for changed hosts, HTTP methods,
    paths, query construction, request bodies, and consumed response fields.

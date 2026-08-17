@@ -2,6 +2,9 @@
   "packageName": "com.eightsleep.eight",
   "sdkPackage": "@mergd/eight-sleep",
   "sdkDirectory": "packages/eight-sleep",
+  "appVersion": "7.51.2",
+  "versionCode": 1007051002,
+  "apkpureUrl": "https://apkpure.com/eight-sleep/com.eightsleep.eight",
   "apiHosts": ["client-api.8slp.net", "app-api.8slp.net"],
   "sourceGlobs": ["**/*.dex", "**/*.smali", "**/*.so"]
 }

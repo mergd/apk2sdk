@@ -1,0 +1,15 @@
+{
+  "packageName": "com.ninebot.segway",
+  "sdkPackage": "@mergd/segway",
+  "sdkDirectory": "packages/segway",
+  "appVersion": "6.10.8",
+  "versionCode": 610081660,
+  "apkpureUrl": "https://apkpure.com/segway-ninebot/com.ninebot.segway",
+  "apiHosts": [
+    "eu-oms-gateway.ninebot.com",
+    "api-jhcx-v6-eu.ninebot.com",
+    "api-jhcx-v6-bj.ninebot.com",
+    "cnnx-omsgw.ninebot.com"
+  ],
+  "sourceGlobs": ["assets/Server.json", "assets/JavaApiList.json", "**/*.dex"]
+}

@@ -1,0 +1,15 @@
+{
+  "packageName": "com.butterflymx.butterflymx",
+  "sdkPackage": "@mergd/butterflymx",
+  "sdkDirectory": "packages/butterflymx",
+  "appVersion": "1.63.0",
+  "versionCode": 1914136311,
+  "apkpureUrl": "https://apkpure.com/butterflymx/com.butterflymx.butterflymx",
+  "apiHosts": [
+    "api.butterflymx.com",
+    "api.na.sandbox.butterflymx.com",
+    "accounts.butterflymx.com",
+    "accounts.na.sandbox.butterflymx.com"
+  ],
+  "sourceGlobs": ["**/config.json", "**/*.dex", "**/*.smali"]
+}

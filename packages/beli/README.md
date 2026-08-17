@@ -2,6 +2,8 @@
 
 Unofficial, typed TypeScript SDK for Beli's private mobile API.
 
+Derived from Beli **9.9.0** (`com.beliapp.myapp`, versionCode `431`) via APKPure.
+
 ```bash
 npm install @mergd/beli
 ```

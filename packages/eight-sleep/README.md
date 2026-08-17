@@ -2,6 +2,8 @@
 
 Unofficial, typed TypeScript SDK for Eight Sleep's private mobile API.
 
+Derived from Eight Sleep **7.51.2** (`com.eightsleep.eight`, versionCode `1007051002`) via APKPure.
+
 ```bash
 npm install @mergd/eight-sleep
 ```

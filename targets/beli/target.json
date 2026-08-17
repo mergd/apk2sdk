@@ -3,5 +3,8 @@
   "sdkPackage": "@mergd/beli",
   "framework": "capacitor-angular",
   "bundleGlobs": ["assets/public/*.js", "assets/public/**/*.js"],
-  "sdkDirectory": "packages/beli"
+  "sdkDirectory": "packages/beli",
+  "appVersion": "9.9.0",
+  "versionCode": 431,
+  "apkpureUrl": "https://apkpure.com/beli/com.beliapp.myapp"
 }

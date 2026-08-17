@@ -1,6 +1,6 @@
 {
   "name": "@mergd/eight-sleep",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Unofficial, typed TypeScript SDK for the Eight Sleep mobile API",
   "license": "MIT",
   "type": "module",

@@ -1,7 +1,7 @@
 {
-  "name": "@mergd/beli",
-  "version": "0.1.1",
-  "description": "Unofficial, typed TypeScript SDK for Beli's mobile API",
+  "name": "@mergd/segway",
+  "version": "0.1.0",
+  "description": "Unofficial, typed TypeScript SDK for the Segway Mobility / Ninebot mobile API",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
@@ -26,17 +26,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mergd/apk2sdk.git",
-    "directory": "packages/beli"
+    "directory": "packages/segway"
   },
-  "homepage": "https://github.com/mergd/apk2sdk/tree/main/packages/beli#readme",
-  "bugs": {
-    "url": "https://github.com/mergd/apk2sdk/issues"
-  },
-  "keywords": ["beli", "sdk", "api", "typescript", "unofficial"],
-  "engines": {
-    "node": ">=20"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+  "homepage": "https://github.com/mergd/apk2sdk/tree/main/packages/segway#readme",
+  "bugs": { "url": "https://github.com/mergd/apk2sdk/issues" },
+  "keywords": ["segway", "ninebot", "scooter", "sdk", "typescript", "unofficial"],
+  "engines": { "node": ">=20" },
+  "publishConfig": { "access": "public" }
 }

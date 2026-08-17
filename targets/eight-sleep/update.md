@@ -5,7 +5,9 @@ unpacked Eight Sleep Android APK.
 
 ## Work
 
-1. Confirm the Android package is `com.eightsleep.eight` and record the app version.
+1. Fetch the APK from **APKPure** (see root `AGENTS.md`). Confirm the Android
+   package is `com.eightsleep.eight` and record `appVersion` / `versionCode` in
+   `target.json`, `SOURCE_APP`, and the README.
 2. Decompile DEX bytecode and inspect native strings where needed. Search for
    `8slp.net`, endpoint paths, HTTP annotations, serializers, and request models.
 3. Build an inventory of changed hosts, methods, paths, query parameters,
