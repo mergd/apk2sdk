@@ -44,7 +44,7 @@ const subscription = await client.request(`/users/${me.userId}/subscriptions`, {
 - `devices.get(deviceId)`, `devices.peripherals(deviceId)`, and `devices.online(deviceId)`
 - `temperature.status(userId)`, `setPower(userId, on)`, and `setLevel(userId, level)`
 - `sleep.trends(input)` and `sleep.intervals(userId, sessionId)`
-- alarm list/create/update/delete, snooze, and dismiss
+- native alarm list/create/update/delete, snooze, and dismiss (app API v2 read, v1 writes)
 - household summary, schedule, current set, and guests
 - `request(path, options)` for unwrapped client/app API endpoints
 

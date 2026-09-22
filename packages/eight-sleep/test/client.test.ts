@@ -80,7 +80,7 @@ describe("EightSleepClient", () => {
   });
 
   test("wraps alarms and exposes the raw request escape hatch", async () => {
-    const alarm = { id: "a1", enabled: true, time: "07:00", daysOfWeek: [1], vibration: true };
+    const alarm = { id: "a1", enabled: true, time: "07:00:00", repeat: { enabled: true, weekDays: { monday: true } }, vibration: { enabled: true, powerLevel: 50, pattern: "RISE" } };
     const { client, requests } = mockClient([
       { body: { alarms: [alarm] } },
       { body: { feature: true } },
@@ -90,6 +90,32 @@ describe("EightSleepClient", () => {
     expect(requests[0]?.url.toString()).toBe("https://app-api.8slp.net/v2/users/u1/alarms");
     expect(await client.request<{ feature: boolean }>("/release/features")).toEqual({ feature: true });
     expect(requests[1]?.url.toString()).toBe("https://client-api.8slp.net/v1/release/features");
+  });
+
+  test("uses the native alarm model and app API methods", async () => {
+    const alarm = { id: "a1", enabled: true, time: "07:00:00", repeat: { enabled: true, weekDays: { monday: true } }, vibration: { enabled: true, powerLevel: 50 } };
+    const { client, requests } = mockClient([
+      { body: { updatedAlarm: alarm } },
+      { body: { alarms: [alarm] } },
+      { body: { updatedAlarm: { ...alarm, enabled: false } } },
+      {}, {}, {},
+    ]);
+    expect(await client.alarms.create("u1", alarm)).toEqual(alarm);
+    expect(await client.alarms.update("u1", "a1", { enabled: false })).toMatchObject({ id: "a1", enabled: false });
+    await client.alarms.snooze("u1", "a1");
+    await client.alarms.dismiss("u1", "a1");
+    await client.alarms.delete("u1", "a1");
+    expect(requests.map(({ url, init }) => [init.method, url.pathname])).toEqual([
+      ["POST", "/v1/users/u1/alarms"],
+      ["GET", "/v2/users/u1/alarms"],
+      ["PUT", "/v1/users/u1/alarms/a1"],
+      ["PUT", "/v1/users/u1/alarms/a1/snooze"],
+      ["PUT", "/v1/users/u1/alarms/a1/dismiss"],
+      ["DELETE", "/v1/users/u1/alarms/a1"],
+    ]);
+    expect(JSON.parse(String(requests[2]?.init.body))).toMatchObject({ id: "a1", enabled: false, repeat: alarm.repeat, vibration: alarm.vibration });
+    expect(JSON.parse(String(requests[3]?.init.body))).toEqual({ snoozeMinutes: 10, ignoreDeviceErrors: false });
+    expect(JSON.parse(String(requests[4]?.init.body))).toEqual({ ignoreDeviceErrors: false });
   });
 
   test("addresses versioned app routes without a second client", async () => {

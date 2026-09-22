@@ -141,28 +141,30 @@ export class AlarmsResource {
 
   async create(userId: string, alarm: CreateEightSleepAlarm, signal?: AbortSignal): Promise<EightSleepAlarm> {
     const value = await this.transport.request<unknown>(`/users/${segment(userId)}/alarms`, {
-      method: "POST", body: alarm, signal,
+      host: "app", method: "POST", body: alarm, signal,
     });
     return unwrapAlarm(value, "alarms.create");
   }
 
   async update(userId: string, alarmId: string, patch: UpdateEightSleepAlarm, signal?: AbortSignal): Promise<EightSleepAlarm> {
+    const current = (await this.list(userId, signal)).find((alarm) => alarm.id === alarmId);
+    if (!current) throw new EightSleepContractError("alarms.update", "alarm not found");
     const value = await this.transport.request<unknown>(`/users/${segment(userId)}/alarms/${segment(alarmId)}`, {
-      method: "PATCH", body: patch, signal,
+      host: "app", method: "PUT", body: { ...current, ...patch, id: alarmId }, signal,
     });
     return unwrapAlarm(value, "alarms.update");
   }
 
   async delete(userId: string, alarmId: string, signal?: AbortSignal): Promise<void> {
-    await this.transport.request(`/users/${segment(userId)}/alarms/${segment(alarmId)}`, { method: "DELETE", signal });
+    await this.transport.request(`/users/${segment(userId)}/alarms/${segment(alarmId)}`, { host: "app", method: "DELETE", signal });
   }
 
   async snooze(userId: string, alarmId: string, signal?: AbortSignal): Promise<void> {
-    await this.transport.request(`/users/${segment(userId)}/alarms/${segment(alarmId)}/snooze`, { method: "POST", body: {}, signal });
+    await this.transport.request(`/users/${segment(userId)}/alarms/${segment(alarmId)}/snooze`, { host: "app", method: "PUT", body: { snoozeMinutes: 10, ignoreDeviceErrors: false }, signal });
   }
 
   async dismiss(userId: string, alarmId: string, signal?: AbortSignal): Promise<void> {
-    await this.transport.request(`/users/${segment(userId)}/alarms/${segment(alarmId)}/dismiss`, { method: "POST", body: {}, signal });
+    await this.transport.request(`/users/${segment(userId)}/alarms/${segment(alarmId)}/dismiss`, { host: "app", method: "PUT", body: { ignoreDeviceErrors: false }, signal });
   }
 }
 
@@ -198,10 +200,11 @@ function unwrapUser(value: unknown, operation: string): EightSleepUser {
 }
 
 function unwrapAlarm(value: unknown, operation: string): EightSleepAlarm {
-  if (!isRecord(value) || !isRecord(value.alarm) || typeof value.alarm.id !== "string") {
+  const alarm = isRecord(value) ? (isRecord(value.updatedAlarm) ? value.updatedAlarm : value.alarm) : null;
+  if (!isRecord(alarm) || typeof alarm.id !== "string") {
     throw new EightSleepContractError(operation, "missing alarm");
   }
-  return value.alarm as EightSleepAlarm;
+  return alarm as EightSleepAlarm;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

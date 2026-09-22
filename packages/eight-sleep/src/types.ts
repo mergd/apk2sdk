@@ -111,9 +111,13 @@ export interface EightSleepAlarm {
   id: string;
   enabled: boolean;
   time: string;
-  daysOfWeek: number[];
-  vibration: boolean;
-  sound?: string | null;
+  repeat?: { enabled?: boolean; weekDays?: Record<string, boolean>; [key: string]: unknown };
+  vibration?: { enabled?: boolean; powerLevel?: number; pattern?: string; [key: string]: unknown };
+  thermal?: { enabled?: boolean; level?: number; [key: string]: unknown };
+  audio?: { enabled?: boolean; level?: number; trackId?: string | null; [key: string]: unknown };
+  smart?: { lightSleepEnabled?: boolean; sleepCapEnabled?: boolean; sleepCapMinutes?: number; [key: string]: unknown };
+  skipNext?: boolean;
+  snoozing?: boolean;
   [key: string]: unknown;
 }
 
