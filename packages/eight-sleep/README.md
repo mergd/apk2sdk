@@ -2,7 +2,7 @@
 
 Unofficial, typed TypeScript SDK for Eight Sleep's private mobile API.
 
-Derived from Eight Sleep **7.51.2** (`com.eightsleep.eight`, versionCode `1007051002`) via APKPure.
+Derived from Eight Sleep **7.57.9** (`com.eightsleep.eight`, versionCode `1007057009`) via APKPure.
 
 ```bash
 npm install @mergd/eight-sleep
@@ -29,6 +29,12 @@ const trends = await client.sleep.trends({
   from: "2026-08-01",
   to: "2026-08-07",
   timeZone: "America/Los_Angeles",
+});
+
+// The app API has versioned routes. Authentication stays caller-owned.
+const subscription = await client.request(`/users/${me.userId}/subscriptions`, {
+  host: "app",
+  version: "v3",
 });
 ```
 

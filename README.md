@@ -16,7 +16,7 @@ bun run check
 | Package | Source app | Status |
 | --- | --- | --- |
 | `@mergd/beli` | Beli 9.9.0 | Initial read-oriented SDK |
-| `@mergd/eight-sleep` | Eight Sleep 7.51.2 | Pod controls, sleep data, alarms, devices, and household data |
+| `@mergd/eight-sleep` | Eight Sleep 7.57.9 | Pod controls, sleep data, alarms, devices, and household data |
 | `@mergd/segway` | Segway Mobility 6.10.8 | Vehicle list + BLE command `ident` from Segway Mobility cloud |
 | `@mergd/butterflymx` | ButterflyMX 1.63.0 | Tenants, buildings, access points, devices, and door release |
 

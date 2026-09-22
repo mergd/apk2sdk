@@ -87,8 +87,15 @@ describe("EightSleepClient", () => {
     ]);
 
     expect(await client.alarms.list("u1")).toEqual([alarm]);
+    expect(requests[0]?.url.toString()).toBe("https://app-api.8slp.net/v2/users/u1/alarms");
     expect(await client.request<{ feature: boolean }>("/release/features")).toEqual({ feature: true });
     expect(requests[1]?.url.toString()).toBe("https://client-api.8slp.net/v1/release/features");
+  });
+
+  test("addresses versioned app routes without a second client", async () => {
+    const { client, requests } = mockClient([{ body: { subscriptions: [] } }]);
+    expect(await client.request<{ subscriptions: unknown[] }>("/users/u1/subscriptions", { host: "app", version: "v3" })).toEqual({ subscriptions: [] });
+    expect(requests[0]?.url.toString()).toBe("https://app-api.8slp.net/v3/users/u1/subscriptions");
   });
 
   test("throws a structured error with the response body", async () => {

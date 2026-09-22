@@ -132,7 +132,7 @@ export class AlarmsResource {
   constructor(private readonly transport: EightSleepTransport) {}
 
   async list(userId: string, signal?: AbortSignal): Promise<EightSleepAlarm[]> {
-    const value = await this.transport.request<unknown>(`/users/${segment(userId)}/alarms`, { signal });
+    const value = await this.transport.request<unknown>(`/users/${segment(userId)}/alarms`, { host: "app", version: "v2", signal });
     if (!isRecord(value) || !Array.isArray(value.alarms)) {
       throw new EightSleepContractError("alarms.list", "missing alarms");
     }

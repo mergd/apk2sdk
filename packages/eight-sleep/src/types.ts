@@ -18,6 +18,8 @@ export interface EightSleepClientOptions {
 
 export interface EightSleepRequestOptions {
   host?: EightSleepHost;
+  /** API path version, overriding the host's default v1 prefix. */
+  version?: "v1" | "v2" | "v3";
   method?: EightSleepMethod;
   query?: Record<string, string | number | boolean | null | undefined>;
   body?: unknown;
