@@ -28,7 +28,12 @@ export class EightSleepTransport {
   async request<T>(path: string, options: EightSleepRequestOptions = {}): Promise<T> {
     if (!path.startsWith("/")) throw new TypeError("Eight Sleep API paths must start with /");
     const method = options.method ?? "GET";
-    const url = new URL(this.hosts[options.host ?? "client"] + path);
+    const base = this.hosts[options.host ?? "client"];
+    const versionedBase = options.version ? base.replace(/\/v\d+$/, `/${options.version}`) : base;
+    if (options.version && versionedBase === base && !base.endsWith(`/${options.version}`)) {
+      throw new TypeError("Versioned requests require a host base URL ending in an API version");
+    }
+    const url = new URL(versionedBase + path);
     for (const [key, value] of Object.entries(options.query ?? {})) {
       if (value !== undefined && value !== null) url.searchParams.set(key, String(value));
     }
